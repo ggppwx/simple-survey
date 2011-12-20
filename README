@@ -1,0 +1,18 @@
+user guide:
+the url on google app engine: 
+
+
+
+1,  if you don't have a account, regiester one at home page.
+2,  login.
+
+
+3,  at home page, you can see all surveys and their information  
+      click the survey name to see the comment, click vote to enter vote page.
+
+4,  at home page, click my survey to enter your survey admin, you can create a new survey, create questions here
+
+5,  if you are a super user, you can go to django admin. 
+
+
+

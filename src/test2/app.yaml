@@ -26,8 +26,10 @@ handlers:
   static_dir: django/contrib/admin/media
   expiration: '0'
 
+- url: /static
+  static_dir: static
+
 - url: /.*
   script: djangoappengine.main.application
 
-- url: /static
-  static_dir: static
+
