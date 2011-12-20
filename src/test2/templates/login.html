@@ -1,0 +1,84 @@
+<!-- login page -->
+
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block header %}
+<h2> Login page</h2>
+<table>
+	<tr>
+		<td width="100">
+		<li>
+			<a href="/surveys/">back home</a>
+		</li></td>
+	</tr>
+</table>
+
+{% endblock %}
+
+
+{% block content%}
+
+
+{% if form.errors %}
+<ul>
+<p>Your username and password didn't match. Please try again.</p></ul>
+{% endif %}
+
+
+<form id="form47" name="form1" class="wufoo  page" autocomplete="off" enctype="multipart/form-data" method="post"
+action="{% url 'django.contrib.auth.views.login' %}">
+{% csrf_token %}
+<ul>
+	
+<li id="foli1" class="notranslate      ">
+<label class="desc" id="title1" for="Field1">
+{{ form.username.label_tag }}
+</label>
+<div id="Field1" name="Field1" class="field text medium"  maxlength="255" tabindex="1" >
+{{ form.username }}
+</div>
+</li>
+
+<li id="foli1" class="notranslate      ">
+<label class="desc" id="title2" for="Field2">
+{{ form.password.label_tag }}
+</label>
+<div id="Field2" name="Field2" class="field text medium"  maxlength="255" tabindex="2" >
+{{ form.password }}
+</div>
+</li>
+
+<input type="hidden" name="next" value="/surveys" />
+
+<li class="buttons ">
+<div>
+<input type="submit" value="login" />
+</li>
+
+</ul>
+</form>
+
+
+<!--
+<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+{% csrf_token %}
+<table>
+<tr>
+    <td>{{ form.username.label_tag }}</td>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.password.label_tag }}</td>
+    <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="/surveys" />
+</form>
+-->
+
+
+
+{% endblock %}

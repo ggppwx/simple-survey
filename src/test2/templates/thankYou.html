@@ -1,0 +1,40 @@
+{% extends "home_base.html"%}
+
+<!-- user information bar -->
+{% block account %}
+{% if user %}
+	<!-- show user info -->
+	<div>
+	<h2>Thank you {{user.username}}</h2>
+	</div>
+{% else %}
+	<!-- show login-->
+	<div>
+	<a href="/surveys/login">Login</a>
+	<a href="/surveys/register">Register</a>
+	</div>
+{% endif %}
+
+{% endblock %}
+
+{% block content%}
+<div>
+<ul>
+	<div>
+	<table align="center">
+	<tr>
+		<td width="100"><li><a href="/surveys/{{survey_id}}/showResults" >show results</a></li></td>
+		<td width="100"><li><a href="/surveys/"  >back to home</a></li></td>
+
+	</tr>
+	</table>	
+	
+	</div>
+	
+	
+
+</ul>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends "votePage_base.html" %}
+
+{%block survey_name%}
+<h2>Survey: {{ survey.survey }}</h2>
+	<table>
+	<tr>
+		<td width="100"><li><a href="/surveys/">back home</a></li></td>
+
+	</tr>
+	</table>	
+{% endblock%}
+
+{% block survey_content %}
+
+{% if poll_list %}
+<form id="form1" name="form1" class="wufoo  page" autocomplete="off" enctype="multipart/form-data" method="post" novalidate
+action="/surveys/{{survey.id}}/vote">{% csrf_token %}
+
+<input id="hide" name="pollCount" type="hidden" value="{{poll_list.count}}" />
+
+<ul>
+<div id="polls">
+{% for p in poll_list %}
+<!-- survey questions -->
+<!-- this is a separate line -->
+<!-- starts from here -->
+
+
+{% if p.question %}
+<div id='poll{{ forloop.counter }}'>
+<li id="foli22" class="notranslate   ">
+<fieldset>
+	
+<![if !IE | (gte IE 8)]>
+<legend id="title{{ forloop.counter }}" class="desc">
+{{ p.question }}
+</legend>
+<![endif]>
+<!--[if lt IE 8]>
+<label id="title22" class="desc">
+What best describes your employment status?
+</label>
+<![endif]-->
+<div>
+<input id="Questions{{forloop.counter}}" name="Questions{{forloop.counter}}" type="hidden" value="{{p.id}}" />
+
+<!-- one choice. radio button -->
+{% for choice in p.choice_set.all %}
+<span>	
+<input id="Field{{forloop.parentloop.counter}}_{{ forloop.counter }}" name="Field{{forloop.parentloop.counter}}" type="radio" class="field radio" value="{{choice.id}}" tabindex="{{forloop.counter}}" />
+<label class="choice" for="Field{{forloop.parentloop.counter }}_{{ forloop.counter }}" >
+{{ choice.choice }}</label>
+</span>
+{% endfor %}
+
+</div>
+</fieldset>
+</li>
+<!-- end of one question -->
+
+</div>
+{% endif %}
+
+
+
+
+{% endfor %}
+</div>
+<!-- leave comment here-->
+<li id="foli107" 
+class="notranslate      "><label class="desc" id="title0" for="Comment0"> <!-- for an id -->
+Comments
+</label>
+
+
+<div>
+<textarea id="Comment0" 
+name="Comment0" 
+class="field textarea medium" 
+spellcheck="true" 
+rows="10" cols="50" 
+tabindex="11" 
+onkeyup=""
+ ></textarea>
+
+</div>
+</li>
+
+
+
+<li class="buttons ">
+<div>
+<input id="saveForm" name="saveForm" class="btTxt submit" type="button" value="Submit" onclick="submitform()"
+ /></div>
+</li>
+
+</ul>
+</form>
+
+<script type="text/javascript">
+function submitform(){	
+	
+	// get all choice field
+	
+	polls = document.getElementById('polls').children
+	for(var i = 1; i<= polls.length; i++){
+		var radio_name = "Field"+i.toString();
+		var choices = document.getElementsByName(radio_name);
+		var flag = false;
+		for( var j =0 ; j<choices.length; j++){
+			if(choices[j].checked){
+				flag = true;
+				break;
+			}
+		}
+		if(flag === false){
+			// this question is not checked
+			alert('question'+i.toString()+' is not checked');
+			return;
+		}
+		
+	}
+		
+	document.forms['form1'].submit();
+	
+
+}
+</script>
+
+
+
+{% else %}
+<ul>
+<h3>No Questions</h3>
+	
+
+</ul>
+{% endif %}
+
+{% endblock %}
+
+

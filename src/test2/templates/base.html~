@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>
+Business Demographic Survey
+</title>
+
+<!-- Meta Tags -->
+<meta charset="utf-8">
+<meta name="generator" content="Wufoo.com" />
+
+<!-- CSS -->
+<link rel="stylesheet" href="{{STATIC_URL}}survey_template/css/structure.css" type="text/css" />
+<link rel="stylesheet" href="{{STATIC_URL}}survey_template/css/form.css" type="text/css" />
+
+<!-- JavaScript -->
+<script src="{{STATIC_URL}}survey_template/scripts/wufoo.js"></script>
+
+<!--[if lt IE 10]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body id="public">
+<div id="container" class="ltr">
+
+<h1 id="logo">
+<a href="http://wufoo.com" title="Powered by Wufoo">Wufoo</a>
+</h1>
+
+
+<header id="header" class="info">
+{% block header %} 
+<h2>{{user.username}}'s survey</h2>
+
+	<table>
+	<tr>
+		<td width="100"><li><a href="/surveys/">back home</a></li></td>
+
+	</tr>
+	</table>	
+	
+{% endblock %}
+
+<div></div>
+</header>
+
+
+{% block content %}
+{% endblock %}
+
+
+
+</div><!--container-->
+<img id="bottom" src="{{STATIC_URL}}survey_template/images/bottom.png" alt="" />
+
+<a class="powertiny" href="http://wufoo.com/tour/" title="Powered by Wufoo"
+style="display:block !important;visibility:visible !important;text-indent:0 !important;position:relative !important;height:auto !important;width:95px !important;overflow:visible !important;text-decoration:none;cursor:pointer !important;margin:0 auto !important">
+<span style="background:url({{STATIC_URL}}survey_template/images/powerlogo.png) no-repeat center 7px; margin:0 auto;display:inline-block !important;visibility:visible !important;text-indent:-9000px !important;position:static !important;overflow: auto !important;width:62px !important;height:30px !important">Wufoo</span>
+<b style="display:block !important;visibility:visible !important;text-indent:0 !important;position:static !important;height:auto !important;width:auto !important;overflow: auto !important;font-weight:normal;font-size:9px;color:#777;padding:0 0 0 3px;">Designed</b>
+</a>
+</body>
+</html>

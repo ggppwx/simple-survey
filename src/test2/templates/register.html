@@ -1,0 +1,94 @@
+<!-- register page -->
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block header %}
+<h2> register page </h2>
+<table>
+	<tr>
+		<td width="100">
+		<li>
+			<a href="/surveys/">back home</a>
+		</li></td>
+	</tr>
+</table>
+{% endblock %}
+
+
+{% block content%}
+
+{% if error %}
+<ul>
+<p>Opps, registration fails: {{error}} </p></ul>
+{% endif %}
+
+
+
+<form id="form1" name="form1" class="wufoo  page" autocomplete="off" enctype="multipart/form-data" method="post" novalidate
+action="/surveys/register">
+{% csrf_token %}
+<ul>
+	
+<li id="foli1" class="notranslate      ">
+<label class="desc" id="title1" for="Field1">
+user name
+</label>
+<div>
+<input id="Field1" name="Field1" type="text" class="field text medium" value="" maxlength="255" tabindex="1" onkeyup="" />
+</div>
+</li>
+
+
+<li id="foli1" class="notranslate  ">
+<label class="desc" id="title2" for="Field2">
+password
+</label>
+<div>
+<input id="Field2" name="Field2" type="password" class="field text medium" value="" maxlength="255" tabindex="2" onkeyup="" />
+</div>
+</li>
+
+
+<li id="foli1" class="notranslate  ">
+<label class="desc" id="title3" for="Field3">
+confirm password
+</label>
+<div>
+<input id="Field3" name="Field3" type="password" class="field text medium" value="" maxlength="255" tabindex="3" onkeyup="" />
+</div>
+</li>
+
+
+<li class="buttons ">
+<div>
+<input id="saveForm" name="saveForm" class="btTxt submit" type="button" value="register" onclick="submitform()"
+ /></div>
+</li>
+
+<input type="hidden" name="next" value="/surveys" />
+
+</ul>
+</form>
+
+<script type="text/javascript">
+function submitform(){	
+	var textInput = document.getElementById("Field1").value.replace(/ /g,'');
+	var password1 = document.getElementById("Field2").value;
+	var password2 = document.getElementById("Field3").value;
+	
+	if ((textInput.length === 0) || (password1.length === 0)){
+		alert('the survey name or password cannot be empty');
+		return;
+	}else{
+		if(password1 !== password2){
+			alert('password not same');	
+			return;
+		}
+		document.forms['form1'].submit();
+	}
+
+}
+</script>
+
+
+{% endblock %}

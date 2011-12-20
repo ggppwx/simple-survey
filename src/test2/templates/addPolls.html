@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+
+
+{% block content%}
+<!-- insert the create form here-->
+<form id="form0" name="form0" class="wufoo topLabel page" autocomplete="off" enctype="multipart/form-data" method="post" novalidate
+action="/surveys/{{survey_id}}/createPoll">{% csrf_token %}
+<ul>
+	
+<li>
+	<h3>Create a question</h3>
+</li>
+	
+	
+<li id="foli16" class="notranslate section">
+
+  <h3 id="title16"> please specify your question</h3>
+
+</li>
+
+
+<li id="foli15" class="notranslate      ">
+<label class="desc" id="title15" for="Field15">
+Your question:
+</label>
+
+<div>
+<input id="Field15" name="Question0" type="text" class="field text medium" value="" maxlength="255" tabindex="47" onkeyup="" />
+</div>
+</li>
+
+<li id="foli16" class="notranslate section">
+<section>
+  <h3 id="title16"> please specify your choice</h3>
+</section>
+</li>
+
+<div id="choice_section">
+	
+<li id="foli15" class="notranslate">
+<label class="desc" id="title1" for="Field1">
+Your choice #1:</label>
+<div>
+<input id="Field1" name="Field1" type="text" class="field text medium" value="" maxlength="255" tabindex="47" onkeyup="" />
+</div></li>
+
+<li id="foli15" class="notranslate">
+<label class="desc" id="title2" for="Field2">
+Your choice #2:
+</label>
+<div>
+<input id="Field2" name="Field1" type="text" class="field text medium" value="" maxlength="255" tabindex="47" onkeyup="" />
+</div></li>
+
+<li id="foli15" class="notranslate">
+<label class="desc" id="title3" for="Field3">
+Your choice #3 (optional):
+</label>
+<div>
+<input id="Field3" name="Field1" type="text" class="field text medium" value="" maxlength="255" tabindex="47" onkeyup="" />
+</div></li>
+
+</div>
+
+<li id="foli15" class="notranslate section">
+<section></section>
+<div>
+<a href="javascript:void(0)" onclick="addChoice()">add another choice</a>
+</div>
+</li>
+
+<script type="text/javascript">
+function addChoice(){
+	var liElement = document.createElement("li");
+	var extraChoiceElement = document.getElementById("choice_section");
+	var numberOfChoice = extraChoiceElement.children.length
+	// alert(numberOfChoice);
+	var newID = numberOfChoice+1;
+	// assign attributes to element
+	liElement.setAttribute("id","foli15");
+	liElement.setAttribute("class", "notranslate");
+	
+	var labelElement = document.createElement("label");
+	labelElement.setAttribute("class","desc");
+	labelElement.setAttribute("id","title"+newID.toString());
+	labelElement.setAttribute("for","Field"+newID.toString());
+	labelElement.textContent = "Your choice #"+newID.toString()+" (optional)";
+	
+	var divElement = document.createElement("div");
+	var inputElement = document.createElement("input");
+	inputElement.setAttribute("id","Field"+newID.toString());
+	inputElement.setAttribute("name","Field1");
+	inputElement.setAttribute("type","text");
+	inputElement.setAttribute("class","field text medium");
+	inputElement.setAttribute("value","")
+	inputElement.setAttribute("maxlength","255");
+	inputElement.setAttribute("tabindex","47");
+	inputElement.setAttribute("onkeyup","");
+	divElement.appendChild(inputElement);
+	liElement.appendChild(labelElement);
+	liElement.appendChild(divElement);
+	extraChoiceElement.appendChild(liElement);
+}
+
+</script>
+
+
+<li class="buttons ">
+<div>
+<input id="saveForm" name="saveForm" class="btTxt submit" type="button" value="Submit" onclick="submitform()"/>
+ 
+ </div></li>
+ 
+<li class="notranslate">
+<table border="1" width="100%">
+	<tr>
+		<th>survey name</th>
+		<th style="width: 70%; ">question name</th>
+		<th>delete</th>
+	</tr>
+	
+	{% for p in poll_list%}
+	<tr>
+		<!-- for loop show all the polls in a survey-->
+		<td>{{p.survey.survey}}</td>
+		<td>{{p.question}} </td>	
+		<td><a href="/surveys/{{survey_id}}/{{p.id}}/deletePoll">delete</a></td>	
+	</tr>
+	{% endfor %}
+	
+</table>
+</li>
+
+</ul>
+
+</form>
+
+
+
+<script type="text/javascript">
+function submitform(){	
+	var textInput = document.getElementById("Field15").value.replace(/ /g,'');
+	if (textInput.length === 0){
+		alert('the question name cannot be empty');
+	}else{
+		var choiceInput = document.getElementById("Field1").value.replace(/ /g,'');	
+		if( choiceInput.length === 0){
+			alert('choice 1 not specified')
+			return
+		}
+		choiceInput = document.getElementById("Field2").value.replace(/ /g,'');	
+		if( choiceInput.length === 0){
+			alert('choice 2 not specified')
+			return
+		}
+		
+		document.forms['form0'].submit();
+	}
+
+}
+</script>
+
+
+
+
+
+{% endblock %}

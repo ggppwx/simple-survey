@@ -1,0 +1,38 @@
+{% extends "base.html"%}
+
+<!-- user information bar -->
+{% block header %}
+{% if user %}
+	<!-- show user info -->
+	<div>
+	<h2>hello {{user.username}}</h2>
+	</div>
+	<a href="/surveys/">back home</a>
+{% else %}
+	<!-- show login-->
+	<div>
+	<a href="/surveys/login">Login</a>
+	<a href="/surveys/register">Register</a>
+	</div>
+{% endif %}
+
+{% endblock %}
+
+{% block content%}
+	<ul>
+	{% if survey_comment%}
+	<div>
+		
+	{% autoescape off%}
+	{{ survey_comment}}
+	{% endautoescape %}
+	
+	</div>
+	{% else%}
+	<div>
+	no comment 
+	</div>
+	{% endif %}
+	
+	<ul>
+{% endblock %}

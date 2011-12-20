@@ -1,0 +1,87 @@
+{% extends "base.html"%}
+
+<!-- user information bar -->
+{% block header %}
+{% if user %}
+	<!-- show user info -->
+	<h2>Survey:
+	{{survey.survey}}
+	</h2>
+	<table>
+	<tr>
+		<td width="100"><li><a href="/surveys/">back home</a></li></td>
+
+	</tr>
+	</table>	
+{% else %}
+	<!-- show login-->
+	<div>
+	<a href="/surveys/login">Login</a>
+	<a href="/surveys/register">Register</a>
+	</div>
+{% endif %}
+
+{% endblock %}
+
+
+
+
+{% block content%}
+<div>
+<ul>
+		
+		
+{% for p in poll_list %}
+<!-- survey questions -->
+<!-- this is a separate line -->	
+<!-- starts from here -->
+{%  if p.question %}
+
+
+<li id="foli22" class="notranslate section  ">
+<!--<fieldset>-->
+<section>
+<![if !IE | (gte IE 8)]>
+<legend id="title{{ forloop.counter }}" class="desc">
+{{ p.question }}
+</legend>
+<![endif]>
+
+
+
+
+<div>
+
+<table border="1" width="50%">
+	<tr>
+		<th width="80%">choice</th>
+		<th>vote</th>
+	</tr>
+	
+		<!-- for loop show all the polls in a survey-->
+		{% for choice in p.choice_set.all %}
+		<tr>
+		<td>{{choice.choice}}</td>
+		<td>{{choice.votes}} </td>
+		</tr>
+		{% endfor %}
+	
+	
+	
+</table>
+
+
+</div>
+<!--</fieldset>-->
+</section>	
+</li>
+<!-- end of one question -->
+
+{% endif %}
+
+{% endfor %}			
+		
+</ul>
+</div>
+
+{% endblock %}

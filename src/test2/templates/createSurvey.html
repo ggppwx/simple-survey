@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+
+
+{% block content%}
+
+<!-- insert the create form here-->
+<form id="form1" name="form1" class="wufoo topLabel page" autocomplete="off" enctype="multipart/form-data" method="post" novalidate
+action="/surveys/createSurvey">{% csrf_token %}
+<ul>
+<li>
+<h3>Create a survey</h3>
+</li>
+<li id="foli1" class="notranslate">
+<label class="desc" id="title1" for="Field1">
+What is your survey name?
+</label>
+<div>
+<input id="Field1" name="SurveyName" type="text" class="field text medium" value="" maxlength="255" tabindex="47" onkeyup="" />
+</div>
+</li>
+
+
+
+<li class="buttons ">
+<div>
+<input id="saveForm" name="saveForm" class="btTxt submit" type="button" value="Submit" onclick="submitform()"/>
+ 
+ </div>
+</li>
+
+<li id="foli1" class="buttons">
+<table border="1" width="100%">
+	<tr>
+		<th>survey name</th>
+		<th>author</th>
+		<th>create date</th>
+		<th>question count</th>
+		<th>edit</th>
+		<th>delete</th>
+	</tr>
+	<!-- for loop show all the polls in a survey-->
+	{% for s in my_survey_list%}
+	<tr>
+		<td>{{s.survey}}</td>
+		<td>{{s.author}}</td>
+		<td>{{s.pub_date}}</td>
+		<td>{{s.poll_set.count}}</td>
+		<td><a href="/surveys/{{s.id}}/createPollPage">edit</a></td> <!-- link to show polls, show polls has addPolls-->
+		<td><a href="/surveys/{{s.id}}/deleteSurvey">delete</a></td>
+	</tr>
+	{% endfor %}
+</table>
+</li>
+
+
+</ul>
+</form>
+
+<script type="text/javascript">
+function submitform(){	
+	var textInput = document.getElementById("Field1").value.replace(/ /g,'');
+	if (textInput.length === 0){
+		alert('the survey name cannot be empty');
+	}else{
+		document.forms['form1'].submit();
+	}
+
+}
+</script>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+<!-- show other surveys of this user -->

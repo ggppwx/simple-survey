@@ -1,0 +1,66 @@
+{% extends "home_base.html" %}
+
+{%block survey_name%}
+Home page
+{% endblock%}
+
+<!-- user information bar -->
+
+
+
+
+
+<!-- content -->
+{% block content %}
+{% if user %}
+
+<form id="form47" name="form47" class="wufoo  page" autocomplete="off" enctype="multipart/form-data" method="post" novalidate
+action="">
+
+<table border="1" width="100%">
+	<tr>
+		<th>survey name</th>
+		<th>author</th>
+		<th>create date</th>
+		<th>popularity</th>
+		<th>vote</th>
+	</tr>
+	<!-- for loop show all the polls in a survey-->
+	{% for s in survey_list%}
+	<tr>
+		<td><a href="/surveys/{{s.id}}/comment">{{s.survey}}</a></td>
+		<td>{{s.author}}</td>
+		<td>{{s.pub_date}}</td>
+		<td>{{s.popularity}}</td>
+		<!-- check if expired  -->
+		
+		{% if s.id in voted_list %}
+		<td><a href="/surveys/{{s.id}}/showResults">result</a></td>
+		{% else %}
+		
+		<!-- check if the survey is expired -->
+		{% if s.id not in expired_list %}
+		<td><a href="/surveys/{{s.id}}/showPollList">vote</a></td>
+		{% else %}
+		<td><a href="/surveys/{{s.id}}/showResults">expired</a></td>
+		{% endif %}
+		
+		{% endif %}
+	</tr>
+	{% endfor %}
+</table>
+
+</form>
+{% else %}
+<ul>
+	<h3>you need to login</h3>
+	<div style="background-color: Silver">
+	<p>{% include "Readme.html" %}</p>
+	</div>
+</ul>
+{% endif %}
+
+
+{% endblock %}
+
+
